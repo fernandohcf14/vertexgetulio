@@ -142,12 +142,12 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.btn{transition:none}}
 </style>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18445909721"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18450864787"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'AW-18445909721');
+    gtag('config', 'AW-18450864787');
   </script>
   <script type="application/ld+json">
   {
@@ -513,6 +513,15 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
       if (capture.ok) {
         const saved = await capture.json();
         cadastroRef = saved.ref_code || '';
+
+        // Google Ads: conta apenas pré-cadastros confirmados pelo backend.
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18450864787/28weCO3PvvccEJO1h95E',
+            'value': 1.0,
+            'currency': 'BRL'
+          });
+        }
       }
     } catch (captureError) {
       console.warn('Não foi possível salvar o pré-cadastro antes do WhatsApp.', captureError);
