@@ -541,6 +541,14 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
             'currency': 'BRL'
           });
         }
+
+        // Meta Pixel: conta somente pré-cadastros confirmados pelo backend.
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            value: 1,
+            currency: 'BRL'
+          });
+        }
       }
     } catch (captureError) {
       console.warn('Não foi possível salvar o pré-cadastro antes do WhatsApp.', captureError);
