@@ -514,6 +514,10 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
     const utmTerm = params.get('utm_term') || '';
     const utmContent = params.get('utm_content') || '';
     const gclid = params.get('gclid') || '';
+    const fbclid = params.get('fbclid') || '';
+    const readCookie = (name) => document.cookie.split('; ').find((item) => item.startsWith(`${name}=`))?.split('=').slice(1).join('') || '';
+    const fbp = readCookie('_fbp');
+    const fbc = readCookie('_fbc') || (fbclid ? `fb.1.${Date.now()}.${fbclid}` : '');
 
     let cadastroRef = '';
     try {
@@ -534,6 +538,8 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
           utm_term: utmTerm,
           utm_content: utmContent,
           gclid,
+          fbp,
+          fbc,
           consent_whatsapp: data.get('consent_whatsapp') === 'on',
           page: window.location.href,
           _hp: ''
@@ -552,12 +558,9 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
           });
         }
 
-        // Meta Pixel: conta somente pré-cadastros confirmados pelo backend.
-        if (typeof fbq === 'function') {
-          fbq('track', 'Lead', {
-            value: 1,
-            currency: 'BRL'
-          });
+        // Mesmo ID do evento enviado pelo servidor: evita duplicidade entre Pixel e CAPI.
+        if (saved.meta_event_id && typeof fbq === 'function') {
+          fbq('track', 'Lead', { value: 1, currency: 'BRL' }, { eventID: saved.meta_event_id });
         }
       }
     } catch (captureError) {
