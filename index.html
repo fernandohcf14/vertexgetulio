@@ -59,8 +59,10 @@ h1,h2,h3,p{margin-top:0}
 h1{font-size:clamp(44px,6vw,78px);line-height:.99;letter-spacing:-.055em;margin:22px 0 26px;max-width:900px}
 h1 em{font-style:normal;font-weight:400;color:var(--off)}
 .hero-lead{font-size:18px;max-width:690px;color:rgba(255,255,255,.84);line-height:1.7}
-.sales-signal{max-width:690px;padding:14px 18px;margin:0 0 20px;border:1px solid rgba(234,236,228,.3);border-left:3px solid var(--off);border-radius:12px;background:rgba(18,18,18,.54);font-size:14px;color:#fff}
-.sales-signal strong{color:var(--off)}.sales-signal small{display:block;margin-top:5px;color:rgba(255,255,255,.72);font-size:12px;line-height:1.5}
+.launch-meter{max-width:690px;padding:20px 22px;margin:0 0 22px;border:1px solid rgba(234,236,228,.32);border-radius:18px;background:rgba(18,18,18,.68);box-shadow:0 18px 42px rgba(0,0,0,.16)}
+.launch-meter-top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px}.launch-meter-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--off);font-weight:700}.launch-meter-value{font-size:31px;line-height:1;font-weight:700;color:#fff;white-space:nowrap}.launch-meter-value span{font-size:13px;font-weight:500}
+.launch-track{height:11px;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden;margin:13px 0 11px}.launch-fill{display:block;width:40%;height:100%;border-radius:99px;background:linear-gradient(90deg,#caa885,#f1d7b5)}.launch-note{font-size:11px;color:rgba(255,255,255,.76);line-height:1.55;margin:0 0 16px}
+.launch-timing{display:flex;gap:12px;flex-wrap:wrap}.launch-timing>div{flex:1 1 195px;padding:11px 13px;border:1px solid rgba(255,255,255,.16);border-radius:11px;font-size:12px;line-height:1.45;color:rgba(255,255,255,.8)}.launch-timing strong{display:block;color:#fff;font-size:14px}.launch-timing small{display:block;margin-top:3px;color:rgba(255,255,255,.6)}
 .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 30px}
 .hero-chips span{padding:8px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;letter-spacing:.04em}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
@@ -112,6 +114,7 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
 .status-card.confirm .status-pill{color:#aee1c4}.status-card.estimate .status-pill{color:#efd0aa}
 .status-card h3{font-size:24px;margin:22px 0 15px}.status-card ul{margin:0;padding-left:18px;color:rgba(255,255,255,.72);font-size:14px;display:grid;gap:8px}
 .legal-note{margin:22px auto 0;max-width:850px;text-align:center;font-size:10px;color:rgba(255,255,255,.42)}
+.investor-section{background:#f1eee8}.investor-grid{display:grid;grid-template-columns:1fr .78fr;gap:75px;align-items:center}.investor-copy h2{font-size:clamp(36px,4vw,58px);line-height:1.04;letter-spacing:-.045em;margin:18px 0 24px}.investor-copy p{color:#62635f}.investor-card{border-radius:24px;background:#fff;padding:32px;box-shadow:var(--shadow)}.investor-card .card-kicker{display:block}.investor-card h3{font-size:29px;line-height:1.12;letter-spacing:-.03em;margin:12px 0}.investor-card p{font-size:14px;color:#62635f}.investor-card ul{padding-left:20px;margin:20px 0 26px;display:grid;gap:10px;font-size:13px}.investor-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.investor-disclaimer{font-size:11px!important;line-height:1.55;margin:18px 0 0;color:#767872!important}
 .form-section{background:#f7f7f4}
 .form-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:start}
 .form-intro{position:sticky;top:130px}
@@ -140,7 +143,7 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
   .header-inner{min-height:70px;gap:14px}.brand-logo{width:300px}.header-cta{padding:8px 13px}
   .hero{min-height:auto}.hero-content{grid-template-columns:1fr;gap:30px;padding:72px 0 54px}.hero-overlay{background:linear-gradient(0deg,rgba(15,15,15,.88) 0%,rgba(15,15,15,.58) 72%,rgba(15,15,15,.45) 100%)}.hero-copy{padding-top:80px}.priority-card{max-width:560px}.hero-lead{font-size:15px}
   .trust-grid{grid-template-columns:1fr 1fr}.trust-grid>div{border-bottom:1px solid rgba(49,50,51,.12)}.trust-grid>div:nth-child(2){border-right:none}.trust-grid>div:first-child{padding-left:20px}
-  .section{padding:76px 0}.split-grid,.form-layout,.video-layout,.faq-grid{grid-template-columns:1fr;gap:46px}.image-panel img{height:580px}.form-intro,.faq-title{position:static}.status-cards{grid-template-columns:1fr}.journey{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr;text-align:center}.footer-small{text-align:center}.footer-brand{justify-content:center}
+  .section{padding:76px 0}.split-grid,.form-layout,.video-layout,.faq-grid,.investor-grid{grid-template-columns:1fr;gap:46px}.image-panel img{height:580px}.form-intro,.faq-title{position:static}.status-cards{grid-template-columns:1fr}.journey{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr;text-align:center}.footer-small{text-align:center}.footer-brand{justify-content:center}
 }
 @media(max-width:560px){
   .brand-logo{width:240px}.header-cta{font-size:0;padding:8px 12px}.header-cta:after{content:"WhatsApp";font-size:11px}
@@ -200,7 +203,12 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
           <div class="eyebrow"><span></span> LANÇAMENTO • VERTEX GETÚLIO</div>
           <h1>Seu 2 quartos no Centro de Feira. <em>Encontre a planta do seu próximo capítulo.</em></h1>
           <p class="hero-lead">Na Rua Realeza, o Vertex Getúlio reúne elevador, opção de varanda e a praticidade de morar no Centro de Feira. Eu te ajudo a comparar as plantas e conferir as unidades da etapa 1 que ainda fazem sentido para o seu perfil.</p>
-          <p class="sales-signal"><strong>Procura intensa após o fim de semana.</strong> Estimativa comercial preliminar: cerca de 40% do empreendimento já comercializado.<small>Percentual informado como estimativa em 27/09/2026, ainda sujeito à confirmação. Estoque e condições por unidade devem ser consultados.</small></p>
+          <div class="launch-meter" aria-label="Andamento estimado das vendas no lançamento">
+            <div class="launch-meter-top"><span class="launch-meter-label">Ritmo do lançamento</span><strong class="launch-meter-value">~40% <span>comercializado*</span></strong></div>
+            <div class="launch-track" role="progressbar" aria-label="Estimativa de percentual comercializado" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40" aria-valuetext="Cerca de 40 por cento, estimativa preliminar"><span class="launch-fill"></span></div>
+            <p class="launch-note">*Estimativa comercial preliminar em 27/09/2026, ainda sujeita à confirmação. A barra ilustra esse percentual; não representa estoque confirmado por planta ou unidade.</p>
+            <div class="launch-timing"><div><strong id="launchDay">7º dia de lançamento</strong><small>Desde segunda-feira, 21/09/2026</small></div><div><strong id="priceWindow">3 dias para a virada de preços</strong><small id="priceWindowNote">Nova tabela prevista para 30/09/2026. Valores sujeitos à confirmação.</small></div></div>
+          </div>
           <div class="hero-chips" aria-label="Diferenciais">
             <span>2 quartos</span><span>Plantas com varanda</span><span>Elevador</span><span>Rua Realeza</span>
           </div>
@@ -216,11 +224,11 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
           <h2>Qual planta combina com o seu próximo passo?</h2>
           <p>Antes de pensar em parcela, vale comparar planta, andar e condição da unidade disponível. Eu faço essa conferência com você.</p>
           <ul>
-            <li>Preço de referência da tabela: R$ 203.990*</li>
+            <li data-before-price>Preço de referência da tabela: R$ 203.990*</li>
             <li>Plantas de 39,13 m² e 40,37 m²</li>
             <li>Simulação orientada pelo seu perfil</li>
           </ul>
-          <p class="table-note">*Referência da tabela de venda consultada em 27/09/2026 para unidade padrão térrea sem varanda; não garante disponibilidade. A tabela informada tem validade até 30/09/2026 e deve ser reconfirmada antes da proposta.</p>
+          <p class="table-note" data-before-price>*Referência da tabela de venda consultada em 27/09/2026 para unidade padrão térrea sem varanda; não garante disponibilidade. Virada de preços informada para 30/09/2026. Confirme a tabela antes da proposta.</p>
         <a href="#pre-cadastro" class="text-link">Ver qual opção faz sentido →</a>
         </aside>
       </div>
@@ -261,21 +269,40 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
         <div class="center-head reveal">
           <span class="section-label light">TABELA OFICIAL - ETAPA 1</span>
           <h2>Compare a planta certa com o valor real da unidade.</h2>
-          <p>Na tabela consultada em 27/09/2026, a unidade padrão térrea sem varanda tinha referência de R$ 203.990; a opção com varanda, a partir de R$ 214.990. Andar, tipologia e estoque alteram a escolha e o preço. Por isso, eu confirmo a unidade e a tabela atual antes de falar em proposta.</p>
+          <p data-before-price>Na tabela consultada em 27/09/2026, a unidade padrão térrea sem varanda tinha referência de R$ 203.990; a opção com varanda, a partir de R$ 214.990. A virada de preços está prevista para 30/09/2026. Andar, tipologia e estoque alteram a escolha e o preço; confirme a unidade e a tabela atual antes de fazer proposta.</p>
         </div>
         <div class="status-cards">
           <article class="status-card confirm reveal">
             <span class="status-pill">2 QUARTOS PADRÃO</span>
             <h3>39,13 m²</h3>
-            <ul><li>Referência da tabela: R$ 203.990*</li><li>Unidade padrão térrea sem varanda</li><li>Valor varia conforme andar e disponibilidade</li><li>Elevador na etapa 1</li></ul>
+            <ul><li data-before-price>Referência da tabela: R$ 203.990*</li><li>Unidade padrão térrea sem varanda</li><li>Valor varia conforme andar e disponibilidade</li><li>Elevador na etapa 1</li></ul>
           </article>
           <article class="status-card estimate reveal delay-1">
             <span class="status-pill">2 QUARTOS COM VARANDA</span>
             <h3>40,37 m²</h3>
-            <ul><li>Referência da tabela a partir de R$ 214.990*</li><li>Valor varia conforme a unidade disponível</li><li>13 andares por torre</li><li>Varanda privativa conforme tipologia</li></ul>
+            <ul><li data-before-price>Referência da tabela a partir de R$ 214.990*</li><li>Valor varia conforme a unidade disponível</li><li>13 andares por torre</li><li>Varanda privativa conforme tipologia</li></ul>
           </article>
         </div>
-        <p class="legal-note">*Preços de referência da tabela de venda consultada em 27/09/2026, com validade informada até 30/09/2026. A referência não garante que a unidade esteja disponível. Confirme estoque, valores, despesas e condições vigentes antes de decidir. Financiamento e eventual enquadramento no Minha Casa, Minha Vida dependem de análise individual.</p>
+        <p class="legal-note" data-before-price>*Preços de referência da tabela de venda consultada em 27/09/2026. Virada de preços informada para 30/09/2026. A referência não garante unidade disponível nem reserva de preço. Confirme estoque, valores, despesas e condições vigentes antes de decidir. Financiamento e eventual enquadramento no Minha Casa, Minha Vida dependem de análise individual.</p>
+      </div>
+    </section>
+
+    <section class="section investor-section" id="investidores">
+      <div class="container investor-grid">
+        <div class="investor-copy reveal">
+          <span class="section-label">PARA QUEM QUER INVESTIR</span>
+          <h2>Uma oportunidade para analisar com números, planta e localização na mesa.</h2>
+          <p>O lançamento também tem atraído investidores. Se você considera comprar para formar patrimônio, eu apresento as unidades disponíveis, comparo as plantas e monto o fluxo de pagamento para você avaliar com clareza.</p>
+          <p data-investor-window>Há opção de parcelamento direto com a construtora em 24 vezes, conforme as condições comerciais e a unidade escolhida. Antes da virada de preços prevista para 30/09, vale consultar a tabela atual e decidir com os dados em mãos.</p>
+          <div class="investor-actions"><a class="btn btn-outline" data-wa="investidor" href="https://wa.me/5575982178857?text=Ol%C3%A1%20Fernando%2C%20quero%20avaliar%20o%20Vertex%20como%20investimento%20e%20entender%20o%20parcelamento%20direto%20em%2024x.%0A%0ARef%3A%20VERTEX_GETULIO%20%7C%20Investidor" target="_blank" rel="noopener">Pedir condições para investir</a><a class="text-link" href="#pre-cadastro">Prefiro preencher meu perfil →</a></div>
+        </div>
+        <aside class="investor-card reveal delay-1">
+          <span class="card-kicker">ANÁLISE PERSONALIZADA</span>
+          <h3>O que entra na conversa?</h3>
+          <p>Uma compra para investimento começa pela unidade certa e por um fluxo que caiba no seu planejamento.</p>
+          <ul><li>Plantas, andares e estoque disponível</li><li>Preço vigente e composição do pagamento</li><li>Parcelamento direto em 24 vezes, sujeito às condições da construtora</li><li>Custos e documentação para uma decisão consciente</li></ul>
+          <p class="investor-disclaimer">Parcelamento sujeito à tabela e às regras contratuais vigentes. Potencial de revenda, locação ou valorização não é garantia de retorno.</p>
+        </aside>
       </div>
     </section>
 
@@ -398,7 +425,8 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
           <a class="btn btn-outline" data-wa="faq" href="https://wa.me/5575982178857?text=Ol%C3%A1%20Fernando%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Vertex%20Get%C3%BAlio.%0A%0ARef%3A%20VERTEX_GETULIO" target="_blank" rel="noopener">Tirar uma dúvida</a>
         </div>
         <div class="accordion reveal delay-1">
-          <details open><summary>O Vertex já tem preço oficial?</summary><p>Sim. Na tabela de venda consultada em 27/09/2026, a unidade padrão térrea sem varanda tinha referência de R$ 203.990, e as opções com varanda partiam de R$ 214.990. A tabela foi informada como válida até 30/09/2026; preço e disponibilidade da unidade precisam ser reconfirmados.</p></details>
+          <details open><summary>O Vertex já tem preço oficial?</summary><p data-before-price>Sim. Na tabela de venda consultada em 27/09/2026, a unidade padrão térrea sem varanda tinha referência de R$ 203.990, e as opções com varanda partiam de R$ 214.990. A virada de preços foi informada para 30/09/2026; preço e disponibilidade da unidade precisam ser reconfirmados.</p></details>
+          <details><summary>É possível comprar como investimento?</summary><p>Sim. Posso consultar as unidades disponíveis e as condições de parcelamento direto com a construtora em 24 vezes. O fluxo depende da unidade, da tabela e das regras contratuais vigentes; não há garantia de retorno financeiro.</p></details>
           <details><summary>Ainda há unidades disponíveis?</summary><p>O fim de semana teve procura forte. A estimativa comercial preliminar é de cerca de 40% do empreendimento comercializado, mas esse percentual ainda precisa de confirmação. Eu confiro quais plantas e andares permanecem disponíveis antes de orientar sua escolha.</p></details>
           <details><summary>Qual será a entrada?</summary><p>Não existe uma entrada única. Ela depende da renda, aprovação de crédito, subsídio, FGTS, valor da unidade e condições comerciais. Por isso a análise individual vem depois da pré-qualificação.</p></details>
           <details><summary>Posso fazer uma simulação?</summary><p>Sim. A simulação completa é feita quando já temos seu perfil, a unidade e as condições vigentes, para evitar passar uma parcela isolada que não corresponda ao cenário real de compra.</p></details>
@@ -440,6 +468,27 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
   </a>
 
   <script>(() => {
+  // Dias de calendário em Feira de Santana, independentemente do fuso do visitante.
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Bahia', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).formatToParts(new Date()).filter(p => p.type !== 'literal').map(p => [p.type, Number(p.value)]));
+  const today = Date.UTC(parts.year, parts.month - 1, parts.day);
+  const dayMs = 86400000;
+  const launchDay = Math.max(1, Math.floor((today - Date.UTC(2026, 8, 21)) / dayMs) + 1);
+  document.getElementById('launchDay').textContent = `${launchDay}º dia de lançamento`;
+  const daysToPriceChange = Math.floor((Date.UTC(2026, 8, 30) - today) / dayMs);
+  const priceWindow = document.getElementById('priceWindow');
+  const priceWindowNote = document.getElementById('priceWindowNote');
+  if (daysToPriceChange > 0) {
+    priceWindow.textContent = `${daysToPriceChange} ${daysToPriceChange === 1 ? 'dia' : 'dias'} para a virada de preços`;
+  } else {
+    priceWindow.textContent = daysToPriceChange === 0 ? 'Virada de preços prevista para hoje' : 'Consulte a tabela de preços atual';
+    priceWindowNote.textContent = 'A alteração foi informada para 30/09/2026. Confirme os valores vigentes por unidade.';
+    document.querySelectorAll('[data-before-price]').forEach(el => {
+      el.textContent = 'Consulte a tabela vigente e a disponibilidade atual da unidade antes de decidir.';
+    });
+    document.querySelector('[data-investor-window]').textContent = 'Há opção de parcelamento direto com a construtora em 24 vezes, conforme as condições comerciais e a unidade escolhida. Peça a tabela vigente e avalie o fluxo antes de decidir.';
+  }
   const form = document.getElementById('leadForm');
   const steps = [...document.querySelectorAll('.quiz-step')];
   const label = document.getElementById('stepLabel');
