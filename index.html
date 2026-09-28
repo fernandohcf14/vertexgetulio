@@ -567,6 +567,10 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
     const utmMedium = params.get('utm_medium') || '';
     const utmTerm = params.get('utm_term') || '';
     const utmContent = params.get('utm_content') || '';
+    const metaTraffic = /^(meta|facebook|instagram|fb|ig)$/i.test(utmSource);
+    const campaignName = params.get('campaign_name') || (metaTraffic ? utmCampaign : '');
+    const adsetName = params.get('adset_name') || (metaTraffic ? utmTerm : '');
+    const adName = params.get('ad_name') || (metaTraffic ? utmContent : '');
     const gclid = params.get('gclid') || '';
     const fbclid = params.get('fbclid') || '';
     const readCookie = (name) => document.cookie.split('; ').find((item) => item.startsWith(`${name}=`))?.split('=').slice(1).join('') || '';
@@ -591,6 +595,12 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
           utm_campaign: utmCampaign,
           utm_term: utmTerm,
           utm_content: utmContent,
+          campaign_name: campaignName,
+          campaign_id: params.get('campaign_id') || '',
+          adset_name: adsetName,
+          adset_id: params.get('adset_id') || params.get('ad_set_id') || '',
+          ad_name: adName,
+          ad_id: params.get('ad_id') || '',
           gclid,
           fbp,
           fbc,
