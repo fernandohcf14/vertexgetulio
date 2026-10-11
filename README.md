@@ -14,7 +14,7 @@ Versão final e autocontida da landing page do **Vertex Getúlio**, de Fernando 
 
 - WhatsApp comercial: +55 75 98217-8857
 - Identificador de origem comercial: `VERTEX_GETULIO`
-- Google Ads: `AW-18445909721`
+- Google Ads: `AW-18450864787`
 - Pré-cadastro FHC-IA: `https://lhbsxhthxbvpddhakqbf.supabase.co/functions/v1/capture-prelead`
 
 ## Pré-cadastro
