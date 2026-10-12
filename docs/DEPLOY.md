@@ -41,5 +41,5 @@ Valide:
 - formulário de pré-cadastro;
 - abertura do WhatsApp;
 - presença de `Ref: VERTEX_GETULIO` na mensagem;
-- Google Ads `AW-18445909721` no HTML;
+- Google Ads `AW-18450864787` no HTML;
 - chamada para `capture-prelead` antes do WhatsApp.
