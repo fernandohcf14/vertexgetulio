@@ -515,6 +515,14 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
     window.dataLayer.push({ event, project: 'vertex_getulio', ...extra });
   };
 
+  // Product interest is measured separately from GTM's generic PageView.
+  // The unique ID keeps the event compatible with later CAPI deduplication.
+  pushEvent('view_content', {
+    event_id: createEventId('view'),
+    content_name: 'Vertex Getúlio',
+    content_category: 'empreendimento_imobiliario'
+  });
+
   // Interaction funnel event: no personal information enters dataLayer.
   let formStarted = false;
   form?.addEventListener('focusin', (e) => {
