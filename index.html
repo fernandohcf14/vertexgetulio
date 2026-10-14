@@ -170,14 +170,8 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
 .phone-video iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:20px;background:#101111}
 @media (max-width:700px){.phone-video{width:100%;padding:8px}.phone-video iframe{border-radius:18px}}
 </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18450864787"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-18450864787');
-  </script>
+  <!-- Google Ads and Meta base tags are managed centrally by GTM-P42Z6BRC. -->
+  <!-- Do not duplicate the Google tag or Google Ads conversion in this page. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -506,10 +500,36 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
   const error = document.getElementById('formError');
   let current = 0;
 
+  // Shared with Meta CAPI for browser/server event deduplication.
+  const createEventId = (prefix) => {
+    if (window.crypto?.getRandomValues) {
+      const bytes = new Uint8Array(12);
+      window.crypto.getRandomValues(bytes);
+      return prefix + '_' + Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+    }
+    return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+  };
+
   const pushEvent = (event, extra = {}) => {
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event, ...extra });
+    window.dataLayer.push({ event, project: 'vertex_getulio', ...extra });
   };
+
+  // Product interest is measured separately from GTM's generic PageView.
+  // The unique ID keeps the event compatible with later CAPI deduplication.
+  pushEvent('view_content', {
+    event_id: createEventId('view'),
+    content_name: 'Vertex Getúlio',
+    content_category: 'empreendimento_imobiliario'
+  });
+
+  // Interaction funnel event: no personal information enters dataLayer.
+  let formStarted = false;
+  form?.addEventListener('focusin', (e) => {
+    if (formStarted || !e.target.matches('input, select, textarea')) return;
+    formStarted = true;
+    pushEvent('form_start', { form_id: 'leadForm', content_name: 'Vertex Getúlio' });
+  });
 
   const show = (idx) => {
     current = Math.max(0, Math.min(idx, steps.length - 1));
@@ -588,11 +608,14 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
     const fbc = readCookie('_fbc') || (fbclid ? `fb.1.${Date.now()}.${fbclid}` : '');
 
     let cadastroRef = '';
+    const clientEventId = createEventId('lead');
     try {
       const capture = await fetch('https://lhbsxhthxbvpddhakqbf.supabase.co/functions/v1/capture-prelead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          project_code: 'VERTEX_GETULIO',
+          event_id: clientEventId,
           full_name: data.get('nome'),
           phone: data.get('whatsapp'),
           purpose: data.get('finalidade'),
@@ -612,33 +635,40 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
           ad_name: adName,
           ad_id: params.get('ad_id') || '',
           gclid,
+          fbclid,
           fbp,
           fbc,
+          referrer: document.referrer || '',
           consent_whatsapp: data.get('consent_whatsapp') === 'on',
           page: window.location.href,
           _hp: ''
         })
       });
-      if (capture.ok) {
-        const saved = await capture.json();
-        cadastroRef = saved.ref_code || '';
-
-        // Google Ads: conta apenas pré-cadastros confirmados pelo backend.
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-18450864787/28weCO3PvvccEJO1h95E',
-            'value': 1.0,
-            'currency': 'BRL'
-          });
-        }
-
-        // Mesmo ID do evento enviado pelo servidor: evita duplicidade entre Pixel e CAPI.
-        if (saved.meta_event_id && typeof fbq === 'function') {
-          fbq('track', 'Lead', { value: 1, currency: 'BRL' }, { eventID: saved.meta_event_id });
-        }
+      if (!capture.ok) throw new Error('capture-prelead HTTP ' + capture.status);
+      const saved = await capture.json();
+      if (saved.ok !== true || !saved.prelead_id || !saved.meta_event_id) {
+        throw new Error('capture-prelead did not confirm a saved lead');
       }
+      cadastroRef = saved.ref_code || '';
+
+      // This is the *only* lead-conversion event emitted by the landing page.
+      // GTM selects the Getúlio Google Ads tag by hostname and the Meta browser
+      // tag uses this exact event_id to deduplicate with Supabase CAPI.
+      // Do NOT call gtag('conversion') or fbq('Lead') separately here.
+      pushEvent('generate_lead', {
+        empreendimento: 'Vertex Getúlio',
+        content_name: 'Vertex Getúlio',
+        content_category: 'lead_form_confirmed',
+        event_id: saved.meta_event_id,
+        meta_event_id: saved.meta_event_id,
+        cadastro_ref: cadastroRef,
+        value: 1,
+        currency: 'BRL'
+      });
     } catch (captureError) {
       console.warn('Não foi possível salvar o pré-cadastro antes do WhatsApp.', captureError);
+      pushEvent('lead_capture_error', { form_id: 'leadForm', reason: 'backend_not_confirmed' });
+      error.textContent = 'Não foi possível confirmar o cadastro automaticamente. Você ainda pode continuar o atendimento pelo WhatsApp.';
     }
 
     const msg = [
@@ -658,14 +688,6 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
       ``,
       `Quero conferir as unidades disponíveis e entender as condições para o meu perfil.`
     ].join('\n');
-
-    pushEvent('generate_lead', {
-      empreendimento: 'Vertex Getúlio',
-      finalidade: data.get('finalidade'),
-      renda: data.get('renda'),
-      prazo: data.get('prazo'),
-      cadastro_ref: cadastroRef || undefined
-    });
 
     const url = `https://wa.me/5575982178857?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank', 'noopener');
@@ -721,25 +743,22 @@ h1 em{font-style:normal;font-weight:400;color:var(--off)}
         url.searchParams.set('text', `${message}\n\nRef: ${tracked.ref_code}`);
         destination = url.toString();
 
-        // Mesmo event_id usado pelo servidor: o Meta deduplica o Contact.
-        if (tracked.meta_event_id && typeof fbq === 'function') {
-          fbq('track', 'Contact', {
-            content_name: 'Vertex Getúlio',
-            content_category: 'whatsapp_site_click',
-            cta_position: position
-          }, { eventID: tracked.meta_event_id });
-        }
+        // Browser Contact is sent only by GTM. Use the same CAPI event ID.
         pushEvent('whatsapp_click', {
           position,
+          cta_position: position,
+          content_name: 'Vertex Getúlio',
+          content_category: 'whatsapp_site_click',
+          event_id: tracked.meta_event_id,
           ref_code: tracked.ref_code,
           meta_event_id: tracked.meta_event_id
         });
       } else {
-        pushEvent('whatsapp_click', { position, tracking_status: 'unavailable' });
+        pushEvent('whatsapp_click', { position, cta_position: position, content_name: 'Vertex Getúlio', event_id: createEventId('wa'), tracking_status: 'unavailable' });
       }
     } catch (trackingError) {
       console.warn('Rastreamento do clique no WhatsApp indisponível.', trackingError);
-      pushEvent('whatsapp_click', { position, tracking_status: 'unavailable' });
+      pushEvent('whatsapp_click', { position, cta_position: position, content_name: 'Vertex Getúlio', event_id: createEventId('wa'), tracking_status: 'unavailable' });
     }
 
     if (popup && !popup.closed) popup.location.href = destination;
